@@ -7,8 +7,11 @@
 | email              | string  | null: false, unique: true |
 | encrypted_password | string  | null: false               |
 | nickname           | string  | null: false               |
-| name               | string  | null: false               |
-| birthdate          | integer | null: false               | 
+| family_name        | string  | null: false               |
+| first_name         | string  | null: false               |
+| family_name_kana   | string  | null: false               |
+| first_name_kana    | string  | null: false               |
+| birthdate          | date    | null: false               | 
 
 ### Association
 
@@ -20,18 +23,19 @@
 
 | Column                     | Type      | Options                        |
 | -------------------------- | --------- | ------------------------------ |
-| item_name                  | text      | null: false                    |
+| item_name                  | string    | null: false                    |
+| item_description           | string    | null: false                    |
+| category_id                | integer   | null: false                    |
+| status_id                  | integer   | null: false                    |
+| burden_id                  | integer   | null: false                    |
+| area_id                    | integer   | null: false                    |
+| days_id                    | integer   | null: false                    |
 | price                      | integer   | null: false                    |
-| category                   | string    | null: false                    |
-| item_state                 | string    | null: false                    |
-| delivery_charge_burden     | string    | null: false                    |
-| regional_original_delivery | string    | null: false                    |
-| delivery_date              | string    | null: false                    |
 | user                       | reference | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - has_many   :comments
 - has_many   :orders
 
@@ -45,8 +49,8 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 
 ## orders テーブル
 
@@ -57,11 +61,11 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :comments
+- belongs_to :user
+- belongs_to :item
 - has_one    :delivery_address
 
-## delivery_address テーブル
+## delivery_addresses テーブル
 
 | Column                      | Type      | Options                        |
 | --------------------------- | --------- | ------------------------------ |
@@ -76,4 +80,4 @@
 
 ### Association
 
-- belongs_to :users
+- belongs_to :order
